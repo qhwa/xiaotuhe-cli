@@ -15,12 +15,6 @@ program_desc 'command-line tool for damn fast uploading and sharing files'
 
 version Xth::VERSION
 
-desc 'auto unzip'
-switch [:z,:unzip]
-
-desc 'send data from system clipboard'
-switch [:c,:clipboard]
-
 desc 'Describe some flag here'
 default_value 'the default'
 arg_name 'The name of the argument'
@@ -50,9 +44,15 @@ end
 desc 'Push file to the cloud'
 arg_name :file, :optional
 command :push do |c|
+  c.desc 'auto unzip'
+  c.switch [:z,:unzip]
+
+  c.desc 'send data from system clipboard'
+  c.switch [:c,:clipboard]
+
   c.action do |global, options, args|
     @file = args.first if args
-    puts Xth::Cli.push( @file )
+    puts Xth::Cli.push( @file, options )
   end
 end
 

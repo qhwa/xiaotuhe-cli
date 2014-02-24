@@ -8,17 +8,20 @@ module Xth
 
     base_uri 'http://localhost:3000'
 
-    def initialize( file )
-      @file = file
+    attr_accessor :options
+
+    def initialize( file, options = {} )
+      @file, @opt = File.new(file), options
     end
 
     def push
       begin
-        self.class.post( '/files', query: {
-          file: @file
+        self.class.post( '/shares', query: {
+          options:  @opt,
+          file:     @file
         })
-      rescue => e
-        e.message
+      rescue Errno::ECONNREFUSED
+        "connection refused by server"
       end
     end
 

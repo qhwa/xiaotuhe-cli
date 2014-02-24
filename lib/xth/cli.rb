@@ -5,8 +5,8 @@ module Xth
 
     class << self
 
-      def push( file )
-        Pusher.new( file ).push
+      def push( file, options={} )
+        Pusher.new( file, options ).push
       end
 
       def push_clipboard( file )
