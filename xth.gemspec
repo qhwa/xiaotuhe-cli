@@ -16,6 +16,9 @@ spec = Gem::Specification.new do |s|
   s.rdoc_options << '--title' << 'xth' << '--main' << 'README.rdoc' << '-ri'
   s.bindir = 'bin'
   s.executables << 'xth'
+
+  s.add_dependency('httmultiparty')
+
   s.add_development_dependency('rake')
   s.add_development_dependency('rdoc')
   s.add_development_dependency('aruba')

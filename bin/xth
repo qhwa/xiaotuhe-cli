@@ -11,12 +11,15 @@ end
 
 include GLI::App
 
-program_desc 'Describe your application here'
+program_desc 'command-line tool for damn fast uploading and sharing files'
 
 version Xth::VERSION
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+desc 'auto unzip'
+switch [:z,:unzip]
+
+desc 'send data from system clipboard'
+switch [:c,:clipboard]
 
 desc 'Describe some flag here'
 default_value 'the default'
@@ -42,6 +45,15 @@ on_error do |exception|
   # Error logic here
   # return false to skip default error handling
   true
+end
+
+desc 'Push file to the cloud'
+arg_name :file, :optional
+command :push do |c|
+  c.action do |global, options, args|
+    @file = args.first if args
+    puts Xth::Cli.push( @file )
+  end
 end
 
 exit run(ARGV)
