@@ -1,0 +1,5 @@
+= xth
+
+Generate this with
+    xth rdoc
+After you have described your command line interface
