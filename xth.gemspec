@@ -18,6 +18,8 @@ spec = Gem::Specification.new do |s|
   s.executables << 'xth'
 
   s.add_dependency('httmultiparty')
+  s.add_dependency('green_shoes')
+  s.add_dependency('rubyzip')
 
   s.add_development_dependency('rake')
   s.add_development_dependency('rdoc')

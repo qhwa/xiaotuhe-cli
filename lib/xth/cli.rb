@@ -9,9 +9,6 @@ module Xth
         Pusher.new( file, options ).push
       end
 
-      def push_clipboard( file )
-      end
-
     end
 
   end

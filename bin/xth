@@ -15,11 +15,6 @@ program_desc 'command-line tool for damn fast uploading and sharing files'
 
 version Xth::VERSION
 
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
-
 pre do |global,command,options,args|
   # Pre logic here
   # Return true to proceed; false to abort and not call the
@@ -42,7 +37,7 @@ on_error do |exception|
 end
 
 desc 'Push file to the cloud'
-arg_name :file, :optional
+arg_name 'file', :optional
 command :push do |c|
   c.desc 'auto unzip'
   c.switch [:z,:unzip]
