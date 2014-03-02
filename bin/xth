@@ -15,25 +15,16 @@ program_desc 'command-line tool for damn fast uploading and sharing files'
 
 version Xth::VERSION
 
-pre do |global,command,options,args|
-  # Pre logic here
-  # Return true to proceed; false to abort and not call the
-  # chosen command
-  # Use skips_pre before a command to skip this block
-  # on that command only
-  true
-end
+desc "host url prefix"
+flag [:h, :host, "host-prefix"],
+  default_value: 'http://xiaotuhe.com'
 
-post do |global,command,options,args|
-  # Post logic here
-  # Use skips_post before a command to skip this
-  # block on that command only
-end
-
-on_error do |exception|
-  # Error logic here
-  # return false to skip default error handling
-  true
+desc 'Show graphic interface'
+command :ui do |c|
+  c.action do |global, options, args|
+    require 'xth/gui'
+    Xth::GUI::App.new.start
+  end
 end
 
 desc 'Push file to the cloud'
@@ -50,5 +41,7 @@ command :push do |c|
     puts Xth::Cli.push( @file, options )
   end
 end
+
+default_command :ui
 
 exit run(ARGV)

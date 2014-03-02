@@ -6,9 +6,13 @@ module Xth
 
     include HTTMultiParty
 
-    base_uri 'http://localhost:3000'
+    base_uri 'http://xiaotuhe.com'
 
     attr_accessor :options
+
+    def self.push_clipboard( &block )
+      new( nil, clipboard: true, unzip: true ).push &block
+    end
 
     def initialize( file, options = {} )
       @opt = options
@@ -25,13 +29,22 @@ module Xth
       @from_clipboard
     end
 
-    def push
+    def push( &block )
       begin
         self.class.post( '/shares', body: {
           options:  @opt,
           file:     @file,
-          name:     filename
-        })
+          name:     filename,
+          format:   :json
+        }).tap do |response|
+          if block_given?
+            if response && response['success']
+              block.call response['url']
+            else
+              block.call false
+            end
+          end
+        end
       rescue Errno::ECONNREFUSED
         "connection refused by server"
       end

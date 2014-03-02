@@ -23,6 +23,9 @@ module Xth
     end
 
     class File < Base
+      def to_io
+        ::File.open( file )
+      end
     end
 
     class Directory < Base
@@ -50,9 +53,10 @@ module Xth
 
     end
 
-    class String < Base
+    class Text < Base
+
       def initialize( text )
-        super StringIO.new(text)
+        super StringIO.new(text), "text"
       end
     end
 

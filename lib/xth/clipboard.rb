@@ -14,7 +14,7 @@ module Xth
 
       def to_blob
         @board ||= ::Gtk::Clipboard.get( Gdk::Selection::CLIPBOARD )
-        to_image || to_file || to_string
+        to_image || to_file || to_text
       end
 
       def to_image
@@ -39,8 +39,8 @@ module Xth
         end
       end
 
-      def to_string
-        Blob::String.new @board.wait_for_text
+      def to_text
+        Blob::Text.new @board.wait_for_text
       end
 
     end
